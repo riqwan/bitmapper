@@ -1,3 +1,5 @@
+require './lib/command_error'
+require './lib/commands/base'
 require './lib/commands/show'
 
 describe Commands::Show do
@@ -27,7 +29,7 @@ describe Commands::Show do
       it 'prints bitmap and returns a bitmap' do
         subject = described_class.new('S', bitmap)
 
-        expect(subject.execute!).to eq([['O', 'A'], ['B', 'S'], ['D', 'A'], ['O', 'Z']])
+        expect { subject.execute! }.to output("OA\nBS\nDA\nOZ\n").to_stdout
       end
     end
 

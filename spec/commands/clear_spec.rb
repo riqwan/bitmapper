@@ -1,3 +1,5 @@
+require './lib/command_error'
+require './lib/commands/base'
 require './lib/commands/clear'
 
 describe Commands::Clear do

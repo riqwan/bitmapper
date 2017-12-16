@@ -1,6 +1,3 @@
-require './lib/commands/base'
-require './lib/command_error'
-
 module Commands
   class HorizontalLine < Base
     attr_reader :x1, :x2, :y, :c

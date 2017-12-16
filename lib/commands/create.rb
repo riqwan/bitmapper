@@ -1,6 +1,3 @@
-require './lib/commands/base'
-require './lib/command_error'
-
 module Commands
   class Create < Base
     attr_reader :m, :n

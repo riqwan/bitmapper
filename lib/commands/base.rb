@@ -20,6 +20,7 @@ module Commands
 
     private
 
+    # Ideally should be a utils method or a method on string
     def number?(string)
       string.to_i.to_s == string
     end

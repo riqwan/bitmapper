@@ -1,6 +1,3 @@
-require './lib/commands/base'
-require './lib/command_error'
-
 module Commands
   class VerticalLine < Base
     attr_reader :x, :y1, :y2, :c

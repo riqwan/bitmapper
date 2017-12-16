@@ -1,6 +1,3 @@
-require './lib/commands/base'
-require './lib/command_error'
-
 module Commands
   class Color < Base
     attr_reader :x, :y, :c
