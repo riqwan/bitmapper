@@ -1,3 +1,5 @@
+require './lib/bitmap'
+require './lib/bit'
 require './lib/command_error'
 require './lib/commands/base'
 require './lib/commands/create'
@@ -90,7 +92,7 @@ describe Commands::Create do
       it 'returns a bitmap with O as the default color' do
         subject = described_class.new('I 2 3')
 
-        expect(subject.execute!).to eq([['O', 'O'], ['O', 'O'], ['O', 'O']])
+        expect(subject.execute!.to_a).to eq([['O', 'O'], ['O', 'O'], ['O', 'O']])
       end
     end
 

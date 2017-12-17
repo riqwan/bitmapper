@@ -1,3 +1,5 @@
+require_relative 'bitmap'
+require_relative 'bit'
 require_relative 'command_error'
 require_relative 'commands/base'
 require_relative 'commands/clear'

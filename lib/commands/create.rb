@@ -12,7 +12,7 @@ module Commands
     def execute!
       raise CommandError.new(command_string, errors) if invalid?
 
-      Array.new(n.to_i) { Array.new(m.to_i, DEFAULT_COLOR) }
+      Bitmap.create(m.to_i, n.to_i)
     end
 
     def valid?

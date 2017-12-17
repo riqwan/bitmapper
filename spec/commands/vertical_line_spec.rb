@@ -1,9 +1,27 @@
+require './lib/bitmap'
+require './lib/bit'
 require './lib/command_error'
 require './lib/commands/base'
 require './lib/commands/vertical_line'
 
 describe Commands::VerticalLine do
-  let(:bitmap) { [['O', 'A', 'Q'], ['B', 'C', 'Z'], ['D', 'A', 'T'], ['O', 'Z', 'Q']] }
+  let(:bitmap) do
+    bitmap = Bitmap.create(3, 4)
+    bitmap.find_bit(1,1).set_color('O')
+    bitmap.find_bit(2,1).set_color('A')
+    bitmap.find_bit(3,1).set_color('Q')
+    bitmap.find_bit(1,2).set_color('B')
+    bitmap.find_bit(2,2).set_color('C')
+    bitmap.find_bit(3,2).set_color('Z')
+    bitmap.find_bit(1,3).set_color('D')
+    bitmap.find_bit(2,3).set_color('A')
+    bitmap.find_bit(3,3).set_color('T')
+    bitmap.find_bit(1,4).set_color('O')
+    bitmap.find_bit(2,4).set_color('Z')
+    bitmap.find_bit(3,4).set_color('Q')
+
+    bitmap
+  end
 
   describe '.valid?' do
     context 'when the command is valid' do
@@ -113,7 +131,7 @@ describe Commands::VerticalLine do
       it 'returns a bitmap with O as the default color' do
         subject = described_class.new('V 2 1 3 W', bitmap)
 
-        expect(subject.execute!).to eq([['O', 'W', 'Q'], ['B', 'W', 'Z'], ['D', 'W', 'T'], ['O', 'Z', 'Q']])
+        expect(subject.execute!.to_a).to eq([['O', 'W', 'Q'], ['B', 'W', 'Z'], ['D', 'W', 'T'], ['O', 'Z', 'Q']])
       end
     end
 

@@ -3,15 +3,7 @@ module Commands
     def execute!
       raise CommandError.new(command_string, errors) if invalid?
 
-      bitmap.each do |row|
-        string = ''
-
-        row.each { |bit| string += bit }
-
-        puts string
-      end
-
-      bitmap
+      puts bitmap.to_s
     end
 
     def valid?

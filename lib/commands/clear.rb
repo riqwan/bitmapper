@@ -3,11 +3,9 @@ module Commands
     def execute!
       raise CommandError.new(command_string, errors) if invalid?
 
-      bitmap.map do |row|
-        row.map do |bit|
-          DEFAULT_COLOR
-        end
-      end
+      bitmap.reset
+
+      bitmap
     end
 
     def valid?

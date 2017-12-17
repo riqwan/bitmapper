@@ -11,9 +11,9 @@ describe BitmapEditor do
       it 'prints the output' do
         subject = described_class.new
 
-        expect { subject.run(success_commands_file_1) }.to output("OOOOO\nOOZZZ\nAWOOO\nOWOOO\nOWOOO\nOWOOO\n").to_stdout
-        expect { subject.run(success_commands_file_2) }.to output("ZOOO\nOOOO\nOOOO\nOOOO\n").to_stdout
-        expect { subject.run(success_commands_file_3) }.to output("OOOOOOOOOOOOOOO\nOOOOOOOOOOOOOOO\nOOOOOOOOOOOOOOO\nOOOOOOOOOOOOOOO\nOOOOBOOOOOOOOOO\nOWOOOOOOOOOOOOO\nOOOOOOOOOOOOOOO\nOOOOOOOOOOOOOOO\nOOOOOOOOOOOOOOO\nOOOOOOOOOOOOOOO\nOOOOOOOOOOOOOOO\nOOOOOOOOOOOOOOO\nOOOOOOOOOOOOOOO\nOOOOOOOOOOOOOOO\nOOOOOOOOOOOOOOO\nOOOOOOOOOOOOOOO\n").to_stdout
+        expect { subject.run(success_commands_file_1) }.to output("\"OOOOO\\nOOZZZ\\nAWOOO\\nOWOOO\\nOWOOO\\nOWOOO\\n\"\n").to_stdout
+        expect { subject.run(success_commands_file_2) }.to output("\"ZOOO\\nOOOO\\nOOOO\\nOOOO\\n\"\n").to_stdout
+        expect { subject.run(success_commands_file_3) }.to output("\"OOOOOOOOOOOOOOO\\nOOOOOOOOOOOOOOO\\nOOOOOOOOOOOOOOO\\nOOOOOOOOOOOOOOO\\nOOOOBOOOOOOOOOO\\nOWOOOOOOOOOOOOO\\nOOOOOOOOOOOOOOO\\nOOOOOOOOOOOOOOO\\nOOOOOOOOOOOOOOO\\nOOOOOOOOOOOOOOO\\nOOOOOOOOOOOOOOO\\nOOOOOOOOOOOOOOO\\nOOOOOOOOOOOOOOO\\nOOOOOOOOOOOOOOO\\nOOOOOOOOOOOOOOO\\nOOOOOOOOOOOOOOO\\n\"\n").to_stdout
       end
     end
 

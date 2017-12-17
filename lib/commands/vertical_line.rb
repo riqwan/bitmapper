@@ -14,15 +14,13 @@ module Commands
     def execute!
       raise CommandError.new(command_string, errors) if invalid?
 
-      bitmap.each_with_index.map do |length, length_index|
-        length.each_with_index.map do |width, width_index|
-          if (y1.to_i..y2.to_i).include?(length_index + 1) && (width_index + 1) == x.to_i
-            c
-          else
-            width
-          end
+      bitmap.bits.each_with_index do |length, y_index|
+        if (y1.to_i..y2.to_i).include?(y_index + 1)
+          bitmap.find_bit(x.to_i, y_index + 1).set_color(c)
         end
       end
+
+      bitmap
     end
 
     def valid?
@@ -37,9 +35,9 @@ module Commands
       add_error("Y1 has to be a number") if !y1.to_s.empty? && !number?(y1)
       add_error("Y2 has to be a number") if !y2.to_s.empty? && !number?(y2)
       add_error("C has to be a string starting from A to Z") if !c.to_s.empty? && !('A'..'Z').include?(c)
-      add_error("X should be within bitmap width range") if !x.to_s.empty? && number?(x) && x.to_i <= 0 || x.to_i > bitmap.first.count
-      add_error("Y1 should be within bitmap length range") if !y1.to_s.empty? && number?(y1) && y1.to_i <= 0 || y1.to_i > bitmap.count
-      add_error("Y2 should be within bitmap length range") if !y2.to_s.empty? && number?(y2) && y2.to_i <= 0 || y2.to_i > bitmap.count
+      add_error("X should be within bitmap width range") if !x.to_s.empty? && number?(x) && x.to_i <= 0 || x.to_i > bitmap.m
+      add_error("Y1 should be within bitmap length range") if !y1.to_s.empty? && number?(y1) && y1.to_i <= 0 || y1.to_i > bitmap.n
+      add_error("Y2 should be within bitmap length range") if !y2.to_s.empty? && number?(y2) && y2.to_i <= 0 || y2.to_i > bitmap.n
 
       errors.empty?
     end
