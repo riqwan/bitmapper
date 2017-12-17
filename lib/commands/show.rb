@@ -5,13 +5,5 @@ module Commands
 
       puts bitmap.to_s
     end
-
-    def valid?
-      return false if !errors.empty?
-
-      add_error("Bitmap doesn't exist") and return false if bitmap.to_s.empty?
-
-      errors.empty?
-    end
   end
 end

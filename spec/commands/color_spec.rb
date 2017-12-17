@@ -77,28 +77,28 @@ describe Commands::Color do
         subject = described_class.new('L 0 4 R', bitmap)
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['X should be within bitmap width range'])
+        expect(subject.errors).to eq(['X should be within bitmap range'])
       end
 
-      it 'adds an error when X is greater than bitmap length range' do
+      it 'adds an error when X is greater than bitmap range' do
         subject = described_class.new('L 5 4 R', bitmap)
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['X should be within bitmap width range'])
+        expect(subject.errors).to eq(['X should be within bitmap range'])
       end
 
       it 'adds an error when Y is less than or equal to 0' do
         subject = described_class.new('L 1 0 R', bitmap)
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['Y should be within bitmap length range'])
+        expect(subject.errors).to eq(['Y should be within bitmap range'])
       end
 
-      it 'adds an error when Y is greater than bitmap length range' do
+      it 'adds an error when Y is greater than bitmap range' do
         subject = described_class.new('L 1 5 R', bitmap)
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['Y should be within bitmap length range'])
+        expect(subject.errors).to eq(['Y should be within bitmap range'])
       end
     end
   end
@@ -116,7 +116,7 @@ describe Commands::Color do
       it 'raises a CommandError with command string and comma separated errors' do
         subject = described_class.new('L 0 5 A', bitmap)
 
-        expect { subject.execute! }.to raise_error(CommandError, "L 0 5 A: X should be within bitmap width range, Y should be within bitmap length range")
+        expect { subject.execute! }.to raise_error(CommandError, "L 0 5 A: X should be within bitmap range, Y should be within bitmap range")
       end
     end
   end

@@ -90,42 +90,42 @@ describe Commands::HorizontalLine do
         subject = described_class.new('H 0 3 2 X', bitmap)
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['X1 should be within bitmap width range'])
+        expect(subject.errors).to eq(['X1 should be within bitmap range'])
       end
 
-      it 'adds an error when X1 is greater than bitmap width range' do
+      it 'adds an error when X1 is greater than bitmap range' do
         subject = described_class.new('H 11 3 2 X', bitmap)
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['X1 should be within bitmap width range'])
+        expect(subject.errors).to eq(['X1 should be within bitmap range'])
       end
 
       it 'adds an error when X2 is less than or equal to 0' do
         subject = described_class.new('H 1 -1 2 X', bitmap)
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['X2 should be within bitmap width range'])
+        expect(subject.errors).to eq(['X2 should be within bitmap range'])
       end
 
-      it 'adds an error when X2 is greater than bitmap width range' do
+      it 'adds an error when X2 is greater than bitmap range' do
         subject = described_class.new('H 1 5 2 X', bitmap)
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['X2 should be within bitmap width range'])
+        expect(subject.errors).to eq(['X2 should be within bitmap range'])
       end
 
-      it 'adds an error when Y is greater than bitmap length range' do
+      it 'adds an error when Y is greater than bitmap range' do
         subject = described_class.new('H 1 2 10 X', bitmap)
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['Y should be within bitmap length range'])
+        expect(subject.errors).to eq(['Y should be within bitmap range'])
       end
 
       it 'adds an error when Y is less than or equal to 0' do
         subject = described_class.new('H 1 3 0 X', bitmap)
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['Y should be within bitmap length range'])
+        expect(subject.errors).to eq(['Y should be within bitmap range'])
       end
     end
   end
@@ -143,7 +143,7 @@ describe Commands::HorizontalLine do
       it 'raises a CommandError with command string and comma separated errors' do
         subject = described_class.new('H 10 -1 -3 5', bitmap)
 
-        expect { subject.execute! }.to raise_error(CommandError, "H 10 -1 -3 5: C has to be a string starting from A to Z, X1 should be within bitmap width range, X2 should be within bitmap width range, Y should be within bitmap length range")
+        expect { subject.execute! }.to raise_error(CommandError, "H 10 -1 -3 5: C has to be a string starting from A to Z, X1 should be within bitmap range, X2 should be within bitmap range, Y should be within bitmap range")
       end
     end
   end

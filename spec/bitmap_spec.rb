@@ -18,6 +18,7 @@ describe Bitmap do
 
     it 'returns the bit if X and Y are within bounds' do
       expect(bitmap.find_bit(1,1).class).to eq(Bit)
+      expect(bitmap.find_bit(3,2).class).to eq(Bit)
       expect(bitmap.find_bit(1,1).to_s).to eq('O')
     end
 

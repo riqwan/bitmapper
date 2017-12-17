@@ -43,7 +43,7 @@ describe Commands::Show do
       it 'prints bitmap and returns a bitmap' do
         subject = described_class.new('S', bitmap)
 
-        expect { subject.execute! }.to output("\"OA\\nBS\\nDA\\nOZ\\n\"\n").to_stdout
+        expect { subject.execute! }.to output("OA\nBS\nDA\nOZ\n").to_stdout
       end
     end
 

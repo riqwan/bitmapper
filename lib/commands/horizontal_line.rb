@@ -15,7 +15,7 @@ module Commands
       raise CommandError.new(command_string, errors) if invalid?
 
       bitmap.bits[y.to_i].each_with_index do |width, x_index|
-        if (x1.to_i..x2.to_i).include?(x_index + 1)
+        if (x1.to_i..x2.to_i).include?(x_index + 1) || (x2.to_i..x1.to_i).include?(x_index + 1)
           bitmap.find_bit(x_index + 1, y.to_i).set_color(c)
         end
       end
@@ -27,17 +27,12 @@ module Commands
       return false if !errors.empty?
 
       add_error("Bitmap doesn't exist") and return false if bitmap.to_s.empty?
-      add_error("X1 can't be empty") if x1.to_s.empty?
-      add_error("X2 can't be empty") if x2.to_s.empty?
-      add_error("Y can't be empty") if y.to_s.empty?
-      add_error("C can't be empty") if c.to_s.empty?
-      add_error("X1 has to be a number") if !x1.to_s.empty? && !number?(x1)
-      add_error("X2 has to be a number") if !x2.to_s.empty? && !number?(x2)
-      add_error("Y has to be a number") if !y.to_s.empty? && !number?(y)
-      add_error("C has to be a string starting from A to Z") if !c.to_s.empty? && !('A'..'Z').include?(c)
-      add_error("X1 should be within bitmap width range") if !x1.to_s.empty? && number?(x1) && x1.to_i <= 0 || x1.to_i > bitmap.m
-      add_error("X2 should be within bitmap width range") if !x2.to_s.empty? && number?(x2) && x2.to_i <= 0 || x2.to_i > bitmap.m
-      add_error("Y should be within bitmap length range") if !y.to_s.empty? && number?(y) && y.to_i <= 0 || y.to_i > bitmap.n
+
+      validates_presence_for([:x1, :x2, :y, :c])
+      validates_numericality_for([:x1, :x2, :y])
+      validates_alphabetical_range_for([:c])
+      validates_bitmap_range_for([:x1, :x2], bitmap.m)
+      validates_bitmap_range_for([:y], bitmap.n)
 
       errors.empty?
     end

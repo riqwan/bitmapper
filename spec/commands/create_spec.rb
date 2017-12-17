@@ -61,28 +61,28 @@ describe Commands::Create do
         subject = described_class.new('I 0 50')
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['M should be greater than 0 and less than 250'])
+        expect(subject.errors).to eq(['M should be greater than 0 and less than or equal to 250'])
       end
 
       it 'adds an error and returns false when N is less than or equal to 0' do
         subject = described_class.new('I 50 -40')
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['N should be greater than 0 and less than 250'])
+        expect(subject.errors).to eq(['N should be greater than 0 and less than or equal to 250'])
       end
 
       it 'adds an error and returns false when M is greater than 250' do
         subject = described_class.new('I 500 50')
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['M should be greater than 0 and less than 250'])
+        expect(subject.errors).to eq(['M should be greater than 0 and less than or equal to 250'])
       end
 
       it 'adds an error and returns false when N is greater than 250' do
         subject = described_class.new('I 50 340')
 
         expect(subject.valid?).to be_falsy
-        expect(subject.errors).to eq(['N should be greater than 0 and less than 250'])
+        expect(subject.errors).to eq(['N should be greater than 0 and less than or equal to 250'])
       end
     end
   end
@@ -98,9 +98,9 @@ describe Commands::Create do
 
     context 'when command is invalid' do
       it 'raises a CommandError with command string and comma separated errors' do
-        subject = described_class.new('I 250 0')
+        subject = described_class.new('I 251 0')
 
-        expect { subject.execute! }.to raise_error(CommandError, "I 250 0: M should be greater than 0 and less than 250, N should be greater than 0 and less than 250")
+        expect { subject.execute! }.to raise_error(CommandError, "I 251 0: M should be greater than 0 and less than or equal to 250, N should be greater than 0 and less than or equal to 250")
       end
     end
   end
