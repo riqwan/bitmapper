@@ -53,7 +53,7 @@ class Bitmap
   def create_bits
     (1..n).map do |m_index|
       (1..m).map do |n_index|
-        Bit.new(m_index, n_index, DEFAULT_COLOR)
+        Bit.new(n_index, m_index, DEFAULT_COLOR)
       end
     end
   end
