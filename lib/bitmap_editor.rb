@@ -8,6 +8,7 @@ require_relative 'commands/create'
 require_relative 'commands/horizontal_line'
 require_relative 'commands/vertical_line'
 require_relative 'commands/show'
+require_relative 'commands/flood_fill'
 
 class BitmapEditor
   def run(file)
@@ -19,7 +20,7 @@ class BitmapEditor
       command_letter = line.chomp.split(' ').first
 
       case command_letter
-      when 'I', 'C', 'L', 'V', 'H'
+      when 'I', 'C', 'L', 'V', 'H', 'F'
         bitmap = command_klass_for(command_letter).new(line, bitmap).execute!
       when 'S'
         command_klass_for(command_letter).new(line, bitmap).execute!
@@ -45,6 +46,8 @@ class BitmapEditor
       Commands::HorizontalLine
     when 'S'
       Commands::Show
+    when 'F'
+      Commands::FloodFill
     end
   end
 end
