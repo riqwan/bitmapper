@@ -29,5 +29,27 @@ describe BitmapEditor do
         expect { subject.run(failure_commands_file_3) }.to raise_error(CommandError)
       end
     end
+
+    context 'commands with flood fill' do
+      context 'commands are all valid' do
+        let!(:success_commands_file_1) { './spec/fixtures/flood_fill/success_commands_1.txt' }
+
+        it 'prints the output' do
+          subject = described_class.new
+
+          expect { subject.run(success_commands_file_1) }.to output("OOOOO\nOOQQQ\nAZOOO\nOWOOO\nOWOOO\nOWOOO\n").to_stdout
+        end
+      end
+
+      context 'commands are not all valid' do
+        let!(:failure_commands_file_1) { './spec/fixtures/failure_commands_1.txt' }
+
+        it 'raises error for a command where validation failed' do
+          subject = described_class.new
+
+          expect { subject.run(failure_commands_file_1) }.to raise_error(CommandError)
+        end
+      end
+    end
   end
 end
