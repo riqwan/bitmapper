@@ -1,7 +1,6 @@
 module Commands
   class FloodFill < Base
-    attr_reader :x, :y, :c, :d
-    attr_reader :queue
+    attr_reader :x, :y, :c, :queue
 
     def initialize(command_string, bitmap = nil)
       super(command_string, bitmap)
@@ -15,21 +14,15 @@ module Commands
     def execute!
       raise CommandError.new(command_string, errors) if invalid?
 
-      @f = bitmap.find_bit(x.to_i, y.to_i)
-      @d = @f.c
+      initial_color = bitmap.find_bit(x.to_i, y.to_i).c
 
       while !queue.empty? do
-        # find current coordinate to process
-        a, b = queue.pop
-        bit = bitmap.find_bit(a.to_i, b.to_i)
+        x, y = queue.pop
+        bit = bitmap.find_bit(x.to_i, y.to_i)
 
-        # skip if color doesnt match
-        next if bit.c != d
+        next if bit.c != initial_color
 
-        # Color existing coordinate
         bit.set_color(c)
-
-        # Find neighbouring cooridnates to enqueue
         enqueue_neighbouring_bits(bit)
       end
 
